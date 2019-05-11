@@ -13,13 +13,15 @@ class Calculator:
 	mult_bool = False
 	add_bool = False
 	sub_bool  = False
-
+	sqr_bool = False
+	root_bool = False
 
 
 	def buttonPressC(self):
 
 		result = 0.0
 		self.number_entered.delete(0,"end")
+
 
 
 	def buttonPress(self, value):
@@ -49,6 +51,8 @@ class Calculator:
 			self.mult_bool = False
 			self.add_bool = False
 			self.sub_bool  = False
+			self.sqr_bool = False
+			self.root_bool = False
 
 			self.result = float(self.number_entered.get())
 
@@ -61,24 +65,46 @@ class Calculator:
 			elif value == "-":
 				print("- pressed")
 				self.sub_bool = True
-			else:
+			elif value == "*":
 				print("* pressed")
 				self.mult_bool = True
+			elif value == "sqr":
+				print("sqr pressed")
+				self.sqr_bool = True
+			elif value == "SqrRoot":
+				print("SqrRoot pressed")
+				self.root_bool = True
+
+				
+
 
 			self.number_entered.delete(0,"end")
 
 	def buttonPressEquals(self):
-		if self.add_bool or self.sub_bool or self.division_bool or self.mult_bool:
+		if self.add_bool or self.sub_bool or self.division_bool or self.mult_bool or self.sqr_bool or self.root_bool:
 			if self.add_bool:
 				answer = self.result + float(self.enteredvalue.get())
+				print(self.result, " ", float(self.enteredvalue.get())," ", answer)
 			elif self.sub_bool:
 				answer = self.result - float(self.enteredvalue.get())
+				print(self.result, " ", float(self.enteredvalue.get())," ", answer)
 			elif self.division_bool:
-				answer = self.result / float(self.enteredvalue.get())
-			else:
+				answer = self.result / float(self.enteredvalue.get())		
+				print(self.result, " ", float(self.enteredvalue.get())," ", answer)
+			elif self.mult_bool:
 				answer = self.result * float(self.enteredvalue.get())
+				print(self.result, " ", float(self.enteredvalue.get())," ", answer)
 
-			print(self.result, " ", float(self.enteredvalue.get())," ", answer)
+			elif self.sqr_bool:
+
+				answer = self.result * self. result
+				print(self.result, " ", self.result," ", answer)
+
+			elif self.root_bool:
+				answer = self.result ** 0.5
+				print(self.result, " ", "sqr root", " ", answer)
+
+			
 
 
 			self.number_entered.delete(0, "end")
@@ -92,7 +118,8 @@ class Calculator:
 
 		root.title("Python Calculator")
 
-		root.geometry("306x130")
+
+		root.geometry("306x200")
 
 		root.resizable(width = False, height = False)
 
@@ -140,8 +167,9 @@ class Calculator:
 
 		self.buttonSub = ttk.Button(root, text="-", command=lambda: self.buttonPressMath('-')).grid(row=4, column =3)
 
+		self.buttonSqr = ttk.Button(root, text="sqr", command = lambda: self.buttonPressMath("sqr")).grid(row=5, column=0)
 
-
+		self.buttonSqrRoot = ttk.Button(root, text="SqrRoot", command = lambda: self.buttonPressMath("SqrRoot")).grid(row=5, column=1)
 
 root = Tk()
 calculator = Calculator(root) 
